@@ -40,11 +40,11 @@ const registerUser = async (req, res) => {
             expiresIn: '7d'
         });
 
-        res.cookie('token', token, {
-            httpOnly: true,
-            sameSite: 'strict',
-            secure: false  //only for development
-        });
+      res.cookie("token", token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+});
 
         const userObj = user.toObject();
         delete userObj.password
@@ -102,11 +102,11 @@ const loginUser = async (req, res) => {
         }
     );
 
-    res.cookie("token", token, {
-        httpOnly: true,
-        secure: false,
-        sameSite: "strict"
-    });
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+});
 
     const userObj = isUser.toObject();
     delete userObj.password;
