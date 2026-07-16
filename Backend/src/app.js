@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieparser())
 app.use(cors({
-    origin: process.env.FRONTEND_URL,
+    origin: https://pulse-up-ap40.onrender.com,
     credentials: true
 }))
 
