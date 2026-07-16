@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { CiMenuFries } from "react-icons/ci";
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import axiosInstance from '../utils/axiosInstance';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeUser } from '../redux/userSlice';
 import { setSearchResult, setSearchLoading, setSearchError, clearSearch } from '../redux/searchSlice';
@@ -26,10 +26,9 @@ const MobileNav = () => {
         }
         dispatch(setSearchLoading(true));
         try {
-            const res = await axios.post(
-                'http://localhost:3000/api/user/finduser',
-                { identifier },
-                { withCredentials: true }
+            const res = await axiosInstance.post(
+                '/api/user/finduser',
+                { identifier }
             );
             dispatch(setSearchResult(res.data.user));
         } catch (err) {
@@ -54,7 +53,7 @@ const MobileNav = () => {
 
     const HandleLogout = async () => {
         try {
-            await axios.get('http://localhost:3000/api/user/logout', { withCredentials: true });
+            await axiosInstance.get('/api/user/logout');
         } catch (err) {
             console.error('Logout error', err?.response?.data || err.message);
         } finally {

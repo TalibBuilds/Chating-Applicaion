@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import axiosInstance from '../utils/axiosInstance'
 import { IoArrowBack, IoSend, IoCamera, IoDocumentText, IoMic } from 'react-icons/io5'
 import CompanyNameLoader from './CompanyNameLoader'
 
@@ -26,9 +26,8 @@ const ConversassionUI = () => {
             if (!selectedUser) return
             setLoading(true)
             try {
-                const res = await axios.get(
-                    `http://localhost:3000/api/message/${selectedUser._id}`,
-                    { withCredentials: true }
+                const res = await axiosInstance.get(
+                    `/api/message/${selectedUser._id}`
                 )
                 setMessages(res.data.data)
             } catch (err) {
@@ -50,10 +49,9 @@ const ConversassionUI = () => {
         if (!text.trim() || !selectedUser) return
         setSending(true)
         try {
-            const res = await axios.post(
-                `http://localhost:3000/api/message/send/${selectedUser._id}`,
-                { text },
-                { withCredentials: true }
+            const res = await axiosInstance.post(
+                `/api/message/send/${selectedUser._id}`,
+                { text }
             )
             setMessages((prev) => [...prev, res.data.data])
             setText('')

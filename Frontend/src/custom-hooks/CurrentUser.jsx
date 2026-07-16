@@ -1,7 +1,7 @@
 // custom-hooks/currentUser.js
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import axios from 'axios';
+import axiosInstance from '../utils/axiosInstance';
 import { setUser, setLoading } from '../redux/userSlice';
 
 const useCurrentUser = () => {
@@ -11,9 +11,7 @@ const useCurrentUser = () => {
     const fetchUser = async () => {
       dispatch(setLoading(true));
       try {
-        const res = await axios.get('http://localhost:3000/api/user/me', {
-          withCredentials: true,
-        });
+        const res = await axiosInstance.get('/api/user/me');
         dispatch(setUser(res.data.user));
       } catch (err) {
         dispatch(setUser(null));

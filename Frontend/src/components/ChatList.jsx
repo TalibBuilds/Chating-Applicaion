@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios'
+import axiosInstance from '../utils/axiosInstance'
 import { setSelectedUser } from '../redux/chatSlice'
 
 const ChatList = () => {
@@ -18,9 +18,8 @@ const ChatList = () => {
         const fetchConversations = async () => {
             setConversationsLoading(true);
             try {
-                const res = await axios.get(
-                    'http://localhost:3000/api/message/conversations',
-                    { withCredentials: true }
+                const res = await axiosInstance.get(
+                    '/api/message/conversations'
                 );
                 setConversations(res.data.data);
             } catch (err) {
@@ -96,7 +95,7 @@ const ChatList = () => {
                                             alt={conv.user.userName}
                                             className='h-10 w-10 rounded-full object-cover'
                                         />
-                                        <h1 className='text-xs text-black font-medium truncate'>{conv.user.userName}</h1>
+                                        <h1 className='text-xs text-white font-medium truncate'>{conv.user.userName}</h1>
                                     </div>
                                     <div className='pr-2'>
                                         <h1 className='text-[10px] truncate max-w-[120px]'>{conv.lastMessage?.text}</h1>

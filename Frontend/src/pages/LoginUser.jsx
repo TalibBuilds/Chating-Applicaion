@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../utils/axiosInstance";
 import { useDispatch } from "react-redux";
 import { setUser } from '../redux/userSlice'
 import CompanyNameLoader from "../components/CompanyNameLoader";
@@ -27,10 +27,9 @@ const LoginUser = () => {
       setLoading(true);
       setServerError(''); // naya state
 
-      const response = await axios.post(
-        "http://localhost:3000/api/auth/login",
-        data,
-        { withCredentials: true }
+      const response = await axiosInstance.post(
+        "/api/auth/login",
+        data
       );
 
       const userData = response?.data?.user;

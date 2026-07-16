@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
+import axiosInstance from '../utils/axiosInstance';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../redux/userSlice';
 import { useNavigate } from 'react-router-dom';
@@ -43,10 +43,9 @@ const Profile = () => {
       }
       formData.append('bio', data.bio);
 
-      const response = await axios.patch(
-        'http://localhost:3000/api/user/profile',
-        formData,
-        { withCredentials: true }
+      const response = await axiosInstance.patch(
+        '/api/user/profile',
+        formData
         // ❌ Content-Type header hata diya — axios khud
         // multipart/form-data + boundary set karega
       );
