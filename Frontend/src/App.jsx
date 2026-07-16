@@ -4,14 +4,13 @@ const RegisterUser = lazy(() => import('./pages/RegisterUser'));
 const LoginUser = lazy(() => import('./pages/LoginUser'));
 const Home = lazy(() => import('./pages/Home'));
 const Profile = lazy(() => import('./pages/Profile'));
-import useCurrentUser from './custom-hooks/currentUser';
+import useCurrentUser from './custom-hooks/CurrentUser';
 import { useSelector } from 'react-redux';
 import UniversalLoader from './components/UniversalLoader';
 
 const App = () => {
   useCurrentUser();
   const { user } = useSelector((state) => state.user);
-
 
   return (
     <Suspense fallback={<div className=' flex justify-center items-center h-screen '><UniversalLoader /></div>}>
