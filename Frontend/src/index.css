@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  /* Hover karne par premium liquid glow aane ke liye */
+  .glass-hover:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border: 0px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.2), inset 0 0 10px rgba(255, 255, 255, 0.1);
+  }
+
+}
+
+/* Jelly Button */
+
+.jelly-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  outline: none;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 9999px;
+
+  background:#344e41;
+  color: #fff;
+
+  transition: all 0.2s ease;
+
+  box-shadow:
+  inset 0 -10px 10px #344e41,
+  0 5px 10px rgba(5, 5, 5, 0.212),
+  inset 0 10px 10px #3a5a40;
+}
+
+.jelly-btn::before,
+.jelly-btn::after {
+  content: "";
+  position: absolute;
+  left: 15%;
+  width: 70%;
+  height: 2px;
+  border-radius: 9999px;
+  filter: blur(1px);
+}
+
+.jelly-btn::before {
+  top: 7px;
+  background: rgba(250, 250, 250, 0.68);
+}
+
+.jelly-btn::after {
+  bottom: 7px;
+  background: rgba(250, 250, 250, 0.14);
+}
+
+.jelly-btn:hover {
+  animation: jelly-horizontal 0.9s both;
+}
+
+@keyframes jelly-horizontal {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+
+/* Jelly Button 2*/
+
+.jelly-btn2 {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  outline: none;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 9999px;
+
+  background: rgb(255, 255, 255);
+  color: #344e41;
+
+  transition: all 0.2s ease;
+
+  box-shadow:
+    inset 0 10px 10px rgb(214, 240, 154),
+    0 5px 10px rgba(5, 5, 5, 0.212),
+    inset 0 -10px 10px rgb(235, 236, 178);
+}
+
+.jelly-btn2::before,
+.jelly-btn2::after {
+  content: "";
+  position: absolute;
+  left: 15%;
+  width: 70%;
+  height: 2px;
+  border-radius: 9999px;
+  filter: blur(1px);
+}
+
+.jelly-btn2::before {
+  top: 7px;
+  background: rgba(250, 250, 250, 0.68);
+}
+
+.jelly-btn2::after {
+  bottom: 7px;
+  background: rgba(250, 250, 250, 0.14);
+}
+
+.jelly-btn2:hover {
+  animation: jelly-horizontal 0.9s both;
+}
+
+@keyframes jelly-horizontal {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
