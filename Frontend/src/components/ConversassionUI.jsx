@@ -23,7 +23,7 @@ const ConversassionUI = () => {
 
     useEffect(() => {
         const fetchMessages = async () => {
-            if (!selectedUser) return
+            if (!selectedUser) return 
             setLoading(true)
             try {
                 const res = await axiosInstance.get(
@@ -101,23 +101,23 @@ const ConversassionUI = () => {
     return (
         <div className='w-full h-full flex flex-col min-h-0'>
 
-            <div className='flex items-center gap-2 p-2 sm:p-3 border-b border-gray-200 bg-white flex-shrink-0'>
+            <div className='flex items-center gap-4 md:gap-2 p-5 sm:p-3 border-b border-gray-200 bg-white flex-shrink-0'>
                 <button
                     onClick={() => navigate('/')}
-                    className='md:hidden text-xl text-gray-700 flex-shrink-0'
+                    className='md:hidden text-3xl text-gray-700 flex-shrink-0'
                 >
                     <IoArrowBack />
                 </button>
                 <img
                     src={selectedUser.avtar || "/images/blanck-profile.jpg"}
                     alt={selectedUser.userName}
-                    className='h-8 w-8 sm:h-9 sm:w-9 rounded-full object-cover flex-shrink-0'
+                    className='h-13 w-13 sm:h-10 sm:w-10 rounded-full object-cover flex-shrink-0'
                 />
-                <h1 className='font-medium text-gray-900 truncate'>{selectedUser.userName}</h1>
+                <h1 className='text-xl md:text-shadow-2xs font-medium text-gray-900 truncate'>{selectedUser.userName}</h1>
             </div>
 
             {/* Messages area */}
-            <div className='flex-1 min-h-0 overflow-y-auto flex flex-col gap-2 p-2 sm:p-3'>
+            <div className='flex-1 min-h-0 overflow-y-auto flex flex-col gap-3.5 p-2 sm:p-3'>
                 {loading ? (
                     <p className='text-center text-gray-400 text-sm'>Loading messages...</p>
                 ) : messages.length === 0 ? (

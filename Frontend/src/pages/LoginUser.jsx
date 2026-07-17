@@ -78,19 +78,19 @@ const LoginUser = () => {
 
         {/* Right Side */}
 
-        <div className="bg-white p-8 sm:p-12 lg:p-14  bg-gradient-to-tl from-[#a3b18a] to-[#315140] p-14 ">
+        <div className="bg-white p-8 sm:p-12 lg:p-14  bg-gradient-to-tl from-[#a3b18a] to-[#315140]">
 
-          <h2 className="text-2xl md:text-3xl font-bold text-[#dad9cd] ">
+          <h2 className="text-4xl md:text-4xl font-bold text-[#dad9cd] ">
             Welcome Back
           </h2>
 
-          <p className="text-[#dad9cd]  mt-2 mb-8 text-ms md:text-lg">
+          <p className="text-[#dad9cd]  mt-2 mb-8 text-xl md:text-lg">
             Login to your account
           </p>
 
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="space-y-5"
+            className="space-y-7"
           >
 
             {/* Identifier */}
@@ -103,7 +103,7 @@ const LoginUser = () => {
                 {...register("Identifier", {
                   required: "Email or Mobile is required",
                 })}
-                className="w-full rounded-xl text-[#dad9cd]  shadow-sm shadow-[#dad7cd] px-4 py-1.5 sm:py-3 outline-none "
+                className="w-full rounded-xl text-[#dad9cd]  shadow-sm shadow-[#dad7cd] px-4 py-3.5 sm:py-3 outline-none text-xl "
               />
 
 
@@ -120,7 +120,7 @@ const LoginUser = () => {
             <div>
               <div className="flex text-[#dad9cd] items-center rounded-xl shadow-sm shadow-[#dad9cd] overflow-hidden ">
                 <input
-                  className="w-full px-4 py-1.5 sm:py-3 outline-none bg-transparent"
+                  className="w-full px-4 py-3.5 sm:py-3 text-xl outline-none bg-transparent"
                   type={seepassword ? "text" : "password"}
                   placeholder="Password"
                   {...register("password", {
@@ -141,7 +141,7 @@ const LoginUser = () => {
                   className="px-4 text-slate-700 hover:text-slate-900"
                   onClick={() => setSeepassword(!seepassword)}
                 >
-                  {seepassword ? <FaEyeSlash /> : <FaEye />}
+                  {seepassword ? <FaEyeSlash size={24}/> : <FaEye size={24}/>}
                 </button>
               </div>
 
@@ -156,7 +156,7 @@ const LoginUser = () => {
 
             <button
               disabled={loading}
-              className={`jelly-btn  w-full py-1.5  sm:py-3 rounded-xl font-semibold transition-all duration-300 ${loading
+              className={`jelly-btn  w-full py-2.5  sm:py-3 rounded-xl text-xl md:lg font-semibold transition-all duration-300 ${loading
                 ? "bg-gray-400 cursor-not-allowed"
                 : "shadow-sm shadow-green-700 hover:bg-green-600 text-white"
                 }`}
@@ -164,11 +164,11 @@ const LoginUser = () => {
               {loading ? "Logging In..." : "Login"}
             </button>
 
-            <p className="text-center text-slate-900">
+            <p className="text-center text-lg md:sm text-slate-900">
               Don't have an account?{" "}
               <Link
                 to="/register"
-                className="text-white font-semibold hover:underline hover:text-cyan-400"
+                className="text-[#993ff3] text-xl font-bold hover:underline hover:text-cyan-400"
               >
                 Sign Up
               </Link>

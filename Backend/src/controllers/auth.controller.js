@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const registerUser = async (req, res) => {
+    console.log("hit hui") 
 
     try {
         const { email, userName, mobileNumber, password } = req.body;
@@ -40,11 +41,11 @@ const registerUser = async (req, res) => {
             expiresIn: '7d'
         });
 
-      res.cookie("token", token, {
-    httpOnly: true,
-    secure: true,
-    sameSite: "none",
-});
+        res.cookie('token', token, {
+            httpOnly: true,
+            sameSite: 'strict',
+            secure: false  //only for development
+        });
 
         const userObj = user.toObject();
         delete userObj.password
@@ -102,11 +103,11 @@ const loginUser = async (req, res) => {
         }
     );
 
-  res.cookie("token", token, {
-    httpOnly: true,
-    secure: true,
-    sameSite: "none",
-});
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: false,
+        sameSite: "strict"
+    });
 
     const userObj = isUser.toObject();
     delete userObj.password;

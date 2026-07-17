@@ -60,19 +60,19 @@ const RegisterUser = () => {
         </div>
 
         {/* Right Side */}
-        <div className=" bg-gradient-to-br from-[#3a5a40] to-[#a3b18a] p-14 p-8 sm:p-12">
+        <div className=" bg-gradient-to-br from-[#3a5a40] to-[#a3b18a] p-8 sm:p-12">
 
-          <h2 className="text-xl sm:text-2xl  font-bold text-[#dad7cd] mb-2">
+          <h2 className="text-3xl sm:text-3xl  font-bold text-[#dad7cd] mb-2">
             Create Account
           </h2>
 
-          <p className="text-[#dad7cd] mb-8 text-10px sm:text-lg">
+          <p className="text-[#dad7cd] mb-8 text-xl sm:text-lg">
             Join your chatting community.
           </p>
 
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="space-y-5"
+            className="space-y-7 sm:space-y-5"
           >
 
             {/* Username */}
@@ -83,7 +83,7 @@ const RegisterUser = () => {
                 {...register("userName", {
                   required: "Username is required",
                 })}
-                className="w-full rounded-xl shadow-sm shadow-[#dad7cd]  px-4 py-2 sm:py-3 text-white outline-none"
+                className="w-full rounded-xl px-4 py-3.5 sm:py-3 text-xl shadow-sm shadow-[#dad7cd] text-white outline-none"
               />
 
               {errors.userName && (
@@ -102,7 +102,7 @@ const RegisterUser = () => {
                 {...register("email", {
                   required: "Email is required",
                 })}
-                className="w-full rounded-xl shadow-sm shadow-[#dad7cd] border-slate-700 px-4 py-2 sm:py-3 text-white outline-none"
+                className="w-full px-4 py-3.5 sm:py-3 text-xl rounded-xl shadow-sm shadow-[#dad7cd] border-slate-700 text-white outline-none"
               />
 
               {errors.email && (
@@ -121,7 +121,7 @@ const RegisterUser = () => {
                 {...register("mobileNumber", {
                   required: "Mobile number is required",
                 })}
-                className="w-full rounded-xl shadow-sm shadow-[#dad7cd] px-4 py-2 sm:py-3 text-white outline-none focus:border-red-500"
+                className="w-full px-4 py-3.5 sm:py-3 text-xl  rounded-xl shadow-sm shadow-[#dad7cd] text-white outline-none focus:border-red-500"
               />
 
               {errors.mobileNumber && (
@@ -133,14 +133,14 @@ const RegisterUser = () => {
 
             {/* Password */}
             <div>
-              <div className="flex items-center rounded-xl shadow-sm shadow-[#dad7cd] overflow-hidden bg-white/10">
+              <div className="flex  items-center rounded-xl shadow-sm shadow-[#dad7cd] overflow-hidden bg-white/10">
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Password"
                   {...register("password", {
                     required: "Password is required",
                   })}
-                  className="w-full px-4 py-2 sm:py-3 text-white bg-transparent outline-none"
+                  className="w-full px-4 py-3.5 sm:py-3 text-xl  text-white bg-transparent outline-none"
                 />
                 <button
                   type="button"
@@ -161,7 +161,7 @@ const RegisterUser = () => {
             {/* Button */}
             <button
               disabled={loading}
-              className={`jelly-btn w-full py-2 sm:py-3 rounded-xl font-semibold transition-all duration-300 ${loading
+              className={`jelly-btn w-full text-xl md:text-sm py-2 sm:py-3 rounded-xl font-semibold transition-all duration-300 ${loading
                 ? "bg-gray-400 cursor-not-allowed"
                 : "bg-cyan-500 hover:bg-green-600 text-white"
                 }`}
@@ -173,7 +173,7 @@ const RegisterUser = () => {
               Already have an account?{" "}
               <Link
                 to="/login"
-                className="text-white hover:underline underline hover:text-cyan-400"
+                className="text-[#993ff3] text-xl hover:underline  hover:text-cyan-400"
               >
                 Login
               </Link>

@@ -38,7 +38,7 @@ const ChatList = () => {
 
     return (
         <div className='w-full min-h-[80vh] md:h-[90vh] md:min-h-0 '>
-            <div className='w-full h-full scrollbar-none overflow-y-auto py-3 px-1.5 flex flex-col gap-2'>
+            <div className='w-full h-full scrollbar-none overflow-y-auto py-3 flex flex-col gap-2'>
 
                 {/* 1. Search Loading state */}
                 {searchLoading && (
@@ -58,15 +58,15 @@ const ChatList = () => {
                 {!searchLoading && searchResult && (
                     <div
                         onClick={() => handleUserClick(searchResult)}
-                        className='w-full glass-effect py-1.5 px-1 flex items-center justify-between gap-2 rounded-4xl cursor-pointer'
+                        className='w-full glass-effect py-2.5 px-1 flex items-center justify-between gap-2  cursor-pointer'
                     >
-                        <div className='flex items-center gap-2'>
+                        <div className='flex items-center gap-3 md:gap-4'>
                             <img
                                 src={searchResult.avtar || "/images/blanck-profile.jpg"}
                                 alt={searchResult.userName}
-                                className='h-10 w-10 rounded-full object-cover'
+                                className='h-15 w-15 md:h-10 md:w-10 rounded-full object-cover'
                             />
-                            <h1 className='text-xs text-black font-medium truncate'>{searchResult.userName}</h1>
+                            <h1 className='text-xl md:text-md text-[#cac7cd] font-medium truncate'>{searchResult.userName}</h1>
                         </div>
                     </div>
                 )}
@@ -87,15 +87,15 @@ const ChatList = () => {
                                 <div
                                     key={conv.user._id}
                                     onClick={() => handleUserClick(conv.user)}
-                                    className='w-full glass-effect py-1.5 px-1 flex items-center justify-between gap-2 rounded-4xl cursor-pointer'
+                                    className='w-full glass-effect py-2.5 px-1 flex items-center justify-between gap-2 cursor-pointer'
                                 >
-                                    <div className='flex items-center gap-2'>
+                                    <div className='flex items-center gap-3 md;gap-2'>
                                         <img
                                             src={conv.user.avtar || "/images/blanck-profile.jpg"}
                                             alt={conv.user.userName}
-                                            className='h-10 w-10 rounded-full object-cover'
+                                            className='h-15 w-15 md:h-10 md:w-10 rounded-full object-cover'
                                         />
-                                        <h1 className='text-xs text-white font-medium truncate'>{conv.user.userName}</h1>
+                                        <h1 className='text-xl md:text-xs text-white font-medium truncate'>{conv.user.userName}</h1>
                                     </div>
                                     <div className='pr-2'>
                                         <h1 className='text-[10px] truncate max-w-[120px]'>{conv.lastMessage?.text}</h1>

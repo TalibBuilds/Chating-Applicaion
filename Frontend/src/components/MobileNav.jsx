@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { CiMenuFries } from "react-icons/ci";
+import { IoCloseSharp } from "react-icons/io5";
 import { useNavigate, Link } from 'react-router-dom';
 import axiosInstance from '../utils/axiosInstance';
 import { useDispatch, useSelector } from 'react-redux';
@@ -65,41 +66,56 @@ const MobileNav = () => {
     }
 
     return (
-        <div className='bg-[#344E41]  md:py-5 md:px-6
-          flex flex-col md:gap-4 gap-1 py-1 px-2 w-full z-99 sticky top-0 left-0'>
-            <div className='flex items-center justify-between px-1'>
-                <div className='flex items-center justify-center gap-2'>
-                    <img src={avtar ? avtar : "/images/profileimage.png"} alt="avtar" className='h-10 w-10 rounded-full object-cover' />
-                    <h1 className='font-medium text-[#DAD7CD] md:text-xl'>{name}</h1>
+        <div className='bg-[#344E41] px-4 py-4 md:px-6 md:py-3 flex flex-col gap-3 md:gap-2 w-full z-50 sticky top-0 left-0'>
+            <div className='flex items-center justify-between px-1 py-2 md:py-3'>
+                <div className='flex items-center gap-3'>
+                    <img
+                        src={avtar ? avtar : "/images/profileimage.png"}
+                        alt="avtar"
+                        className='h-15 w-15 md:h-10 md:w-10 rounded-full object-cover'
+                    />
+                    <h1 className='font-medium text-[#DAD7CD] text-2xl md:text-xl'>{name}</h1>
                 </div>
-                <div onClick={() => { setMenu(prev => !prev) }} className='font-bold p-3 text-[#dad7cd] '>
-                    <CiMenuFries size={22} />
+
+                <div
+                    onClick={() => setMenu(prev => !prev)}
+                    className='cursor-pointer p-2 text-3xl md:text-xl text-[#dad7cd]'
+                >
+                    <CiMenuFries />
                 </div>
-                {logout && (
-                    <div className='absolute top-50 right-30 z-122 p-3 shadow-md rounded'>
-                        <p className='mb-2'>Are you sure you want to logout?</p>
+
+                {logout && menu && (
+                    <div className='absolute top-14 right-4 z-[60] bg-white p-3 shadow-md rounded-lg'>
+                        <p className='mb-2 text-sm'>Are you sure you want to logout?</p>
                         <div className='flex gap-2'>
-                            <button onClick={HandleLogout} className='px-3 py-1 bg-red-500 text-white rounded'>Yes</button>
-                            <button onClick={() => setLogout(false)} className='px-3 py-1 bg-gray-200 rounded'>No</button>
+                            <button onClick={HandleLogout} className='px-3 py-1 text-sm bg-red-500 text-white rounded'>Yes</button>
+                            <button onClick={() => setLogout(false)} className='px-3 py-1 text-sm bg-gray-200 rounded'>No</button>
                         </div>
                     </div>
                 )}
 
-                {
-                    menu &&
-                    <div className='absolute min-h-[90vh] z-99 h-full w-[30%] top-0 right-0 pt-5 pr-3 bg-[#344E41] text-[#DAD7CD] '>
-                        <ul className='flex flex-col items-end gap-4.5 text-[12px]'>
-                            <li onClick={() => { setMenu(prev => !prev) }} className='bg-white font-bold rounded-4xl text-black p-2'>CLOSE</li>
-                            <Link to={'/'}><li className='font-medium '>Edit Profile</li></Link>
-                            <Link to={'/invite'}><li className='font-medium '>Invite</li></Link>
+                {menu && (
+                    <div className='absolute min-h-screen h-full w-full top-0 right-0 pt-14 pr-4 bg-[#344E41] text-[#DAD7CD] z-50'>
+                        <ul className='flex flex-col items-end gap-6 md:gap-4 text-xl md:text-base'>
+                            <li onClick={() => setMenu(prev => !prev)} className='bg-white font-bold rounded-full text-black p-2 cursor-pointer'>
+                                <IoCloseSharp />
+                            </li>
+                            <Link to={'/'}><li className='font-medium'>Edit Profile</li></Link>
+                            <Link to={'/invite'}><li className='font-medium'>Invite</li></Link>
                             <li onClick={() => setLogout(true)} className='font-medium cursor-pointer'>Logout</li>
-                            <Link to={'/share'}><li className='font-medium '>Share Id</li></Link>
+                            <Link to={'/share'}><li className='font-medium'>Share Id</li></Link>
                         </ul>
                     </div>
-                }
+                )}
             </div>
-            <div className='flex items-center justify-center border-2 border-white rounded-4xl'>
-                <input onChange={HandleSerchUser} type="text" placeholder='Search' className='w-full glass-effect  rounded-4xl px-3 py-1  text-[#DAD7CD]  outline-none ' />
+
+            <div className='flex items-center justify-center border-2 border-white rounded-full'>
+                <input
+                    onChange={HandleSerchUser}
+                    type="text"
+                    placeholder='Search'
+                    className='w-full glass-effect rounded-full text-2xl px-4 py-2 md:py-1.5 md:text-sm  text-[#DAD7CD] outline-none'
+                />
             </div>
         </div>
     )
