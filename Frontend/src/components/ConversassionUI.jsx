@@ -3,32 +3,29 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import axiosInstance from '../utils/axiosInstance'
 import { IoArrowBack, IoSend, IoCamera, IoDocumentText, IoMic } from 'react-icons/io5'
+import { BsEmojiSunglasses } from "react-icons/bs";
 import CompanyNameLoader from './CompanyNameLoader'
+import EmojiPicker from 'emoji-picker-react';
 
 const ConversassionUI = () => {
     const navigate = useNavigate()
     const { selectedUser } = useSelector((state) => state.chat)
-    const { user } = useSelector((state) => state.user) // current logged-in user
+    const { user } = useSelector((state) => state.user)
 
     const [messages, setMessages] = useState([])
     const [loading, setLoading] = useState(true)
     const [text, setText] = useState('')
     const [sending, setSending] = useState(false)
+    const [openemojiPannel, setOpenemojiPannel] = useState(false) // ✅ false se shuru
 
     const messagesEndRef = useRef(null)
-    const imageInputRef = useRef(null)
-    const documentInputRef = useRef(null)
-
-    //** */ message fetching***
 
     useEffect(() => {
         const fetchMessages = async () => {
-            if (!selectedUser) return 
+            if (!selectedUser) return
             setLoading(true)
             try {
-                const res = await axiosInstance.get(
-                    `/api/message/${selectedUser._id}`
-                )
+                const res = await axiosInstance.get(`/api/message/${selectedUser._id}`)
                 setMessages(res.data.data)
             } catch (err) {
                 console.error('Error fetching messages', err?.response?.data || err.message)
@@ -39,20 +36,15 @@ const ConversassionUI = () => {
         fetchMessages()
     }, [selectedUser])
 
-    // ***new message auto scroll bottom****
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
     }, [messages])
 
-    // Message send karna****
     const handleSend = async () => {
         if (!text.trim() || !selectedUser) return
         setSending(true)
         try {
-            const res = await axiosInstance.post(
-                `/api/message/send/${selectedUser._id}`,
-                { text }
-            )
+            const res = await axiosInstance.post(`/api/message/send/${selectedUser._id}`, { text })
             setMessages((prev) => [...prev, res.data.data])
             setText('')
         } catch (err) {
@@ -69,27 +61,15 @@ const ConversassionUI = () => {
         }
     }
 
-    const handleFileSelect = (file, type) => {
-        if (!file) return
-        console.log(`${type} selected:`, file)
-        // TODO: upload file or attach to message
-    }
-
-    const handleDocumentChange = (e) => {
-        handleFileSelect(e.target.files?.[0], 'document')
-    }
-
-    const handleImageChange = (e) => {
-        handleFileSelect(e.target.files?.[0], 'image')
-    }
-
     const handleVoiceClick = () => {
         console.log('Voice-to-text action triggered')
-        // TODO: integrate speech recognition
     }
 
-    //***// Agar koi user select nahi hua to *****
-    // lekin only desktop
+    //   emoji select function***
+    const handleEmojiClick = (emojiData) => {
+        setText((prev) => prev + emojiData.emoji)
+    }
+
     if (!selectedUser) {
         return (
             <div className='w-full h-full flex items-center justify-center'>
@@ -116,8 +96,8 @@ const ConversassionUI = () => {
                 <h1 className='text-xl md:text-shadow-2xs font-medium text-gray-900 truncate'>{selectedUser.userName}</h1>
             </div>
 
-            {/* Messages area */}
-            <div className='flex-1 min-h-0 overflow-y-auto flex flex-col gap-3.5 p-2 sm:p-3'>
+            <div 
+            className='flex-1 min-h-0 overflow-y-auto flex flex-col gap-15.5 md:gap-10 pt-10 md:p-2 sm:p-3'>
                 {loading ? (
                     <p className='text-center text-gray-400 text-sm'>Loading messages...</p>
                 ) : messages.length === 0 ? (
@@ -128,9 +108,9 @@ const ConversassionUI = () => {
                         return (
                             <div
                                 key={msg._id}
-                                className={`flex gap-2 max-w-[85%] sm:max-w-[70%] px-3 py-2 rounded-2xl text-sm break-words ${isMyMessage
-                                        ? 'text-white self-end jelly-btn2'
-                                        : 'text-white jelly-btn self-start'
+                                className={`flex gap-2 max-w-[85%] sm:max-w-[70%] px-3 py-2 rounded-2xl text-xl md:text-sm break-words ${isMyMessage
+                                    ? 'text-white self-end jelly-btn2'
+                                    : 'text-white jelly-btn self-start'
                                     }`}
                             >
                                 <p className='min-w-0 break-words'>{msg.text}</p>
@@ -144,58 +124,38 @@ const ConversassionUI = () => {
                 <div ref={messagesEndRef} />
             </div>
 
-            {/* Input box */}
+            {/* emoji box  */}
+            {openemojiPannel && (
+                <div className='flex-shrink-0 '>
+                    <EmojiPicker onEmojiClick={handleEmojiClick} />
+                </div>
+            )}
+
             <div className='flex items-center gap-1.5 sm:gap-2 p-2 sm:p-3 border-t border-gray-200 flex-shrink-0 flex-wrap sm:flex-nowrap'>
 
-                <input
-                    ref={documentInputRef}
-                    type='file'
-                    accept='.pdf,.doc,.docx,.txt'
-                    onChange={handleDocumentChange}
-                    className='hidden'
-                />
-
-                <input
-                    ref={imageInputRef}
-                    type='file'
-                    accept='image/*'
-                    onChange={handleImageChange}
-                    className='hidden'
-                />
-
                 <button
+                    onClick={() => setOpenemojiPannel(prev => !prev)}
                     type='button'
-                    onClick={() => documentInputRef.current?.click()}
-                    className='h-9 w-9 sm:h-10 sm:w-10 flex-shrink-0 flex items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 transition'
-                    title='Attach document'
+                    className='h-15 w-15 md:h-9 md:w-9 sm:h-10 sm:w-10 flex-shrink-0 flex items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 transition'
+                    title='Add Emoji'
                 >
-                    <IoDocumentText />
-                </button>
-
-                <button
-                    type='button'
-                    onClick={() => imageInputRef.current?.click()}
-                    className='h-9 w-9 sm:h-10 sm:w-10 flex-shrink-0 flex items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 transition'
-                    title='Upload photo'
-                >
-                    <IoCamera />
+                    <BsEmojiSunglasses className='text-2xl md:text-shadow-2xs' />
                 </button>
 
                 <input
+                    onClick={() => { setOpenemojiPannel(false) }}
                     type='text'
                     value={text}
                     onChange={(e) => setText(e.target.value)}
                     onKeyDown={handleKeyDown}
                     placeholder='Type a message...'
-                    className='flex-1 min-w-0 rounded-full px-3 sm:px-4 py-2 bg-white outline-none text-sm'
+                    className='flex-1 min-w-0 rounded-full py-3 md:py-2 px-3 md:px-2 text-2xl bg-white outline-none md:text-sm'
                 />
-
-
 
                 <button
                     type='button'
                     onClick={handleVoiceClick}
-                    className='h-9 w-9 sm:h-10 sm:w-10 flex-shrink-0 flex items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 transition'
+                    className='h-15 w-15 md:h-9 md:w-9 sm:h-10 sm:w-10 flex-shrink-0 flex items-center justify-center rounded-full bg-slate-100 text-slate-700 hover:bg-slate-200 transition'
                     title='Voice to text'
                 >
                     <IoMic />
@@ -204,7 +164,7 @@ const ConversassionUI = () => {
                 <button
                     onClick={handleSend}
                     disabled={sending || !text.trim()}
-                    className='h-9 w-9 sm:h-10 sm:w-10 flex-shrink-0 flex items-center justify-center rounded-full jelly-btn2 text-white'
+                    className='h-15 w-15 md:h-9 md:w-9 sm:h-10 sm:w-10 flex-shrink-0 flex items-center justify-center rounded-full jelly-btn2 text-white'
                 >
                     <IoSend />
                 </button>

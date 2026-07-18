@@ -41,11 +41,11 @@ const registerUser = async (req, res) => {
             expiresIn: '7d'
         });
 
-       res.cookie("token", token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-});
+        res.cookie('token', token, {
+            httpOnly: true,
+            sameSite: 'strict',
+            secure: false  //only for development
+        });
 
         const userObj = user.toObject();
         delete userObj.password
@@ -104,11 +104,12 @@ const loginUser = async (req, res) => {
         }
     );
 
-  res.cookie("token", token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-});
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: false,
+        sameSite: "strict"
+    });
+
     const userObj = isUser.toObject();
     delete userObj.password;
 
