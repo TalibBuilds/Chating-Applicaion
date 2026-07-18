@@ -6,9 +6,9 @@ const Landing = () => {
     <div className='min-h-screen w-full flex flex-col items-center justify-center bg-[#344e41] p-15'>
       <div className='w-full max-w-lg bg-gradient-to-br from-[#3a5a40] to-[#a3b18a] rounded-2xl shadow-[0_10px_50px_rgba(0,55,0,0.55)] p-10 sm:p-14 text-center'>
 
-        <h1 className='text-5xl font-bold mb-4 text-[#dad7cd]'>
+        <h1 className='text-4xl font-bold mb-4 text-[#dad7cd]'>
           Welcome to
-          <span className='text-black ml-2'>PulseUp</span>
+          <span className='text-black ml-2 text-2xl'>PulseUp</span>
         </h1>
 
         <p className='text-[#dad7cd] text-lg mb-10 leading-8'>
