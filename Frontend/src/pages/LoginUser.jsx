@@ -41,7 +41,7 @@ const LoginUser = () => {
 
       dispatch(setUser(userData));
       toast.success('Login SuccessFully')
-      navigate("/", { replace: true });
+      navigate("/me", { replace: true });
 
     } catch (err) {
       resetField("password");

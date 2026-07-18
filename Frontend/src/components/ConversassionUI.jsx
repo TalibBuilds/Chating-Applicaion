@@ -103,7 +103,7 @@ const ConversassionUI = () => {
 
             <div className='flex items-center gap-4 md:gap-2 p-5 sm:p-3 border-b border-gray-200 bg-white flex-shrink-0'>
                 <button
-                    onClick={() => navigate('/')}
+                    onClick={() => navigate('/me')}
                     className='md:hidden text-3xl text-gray-700 flex-shrink-0'
                 >
                     <IoArrowBack />

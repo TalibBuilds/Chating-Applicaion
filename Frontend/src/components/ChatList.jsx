@@ -95,11 +95,11 @@ const ChatList = () => {
                                             alt={conv.user.userName}
                                             className='h-15 w-15 md:h-10 md:w-10 rounded-full object-cover'
                                         />
-                                        <h1 className='text-xl md:text-xs text-white font-medium truncate'>{conv.user.userName}</h1>
+                                        <h1 className='text-xl md:text-xs text-[#cac7cd] font-medium truncate'>{conv.user.userName}</h1>
                                     </div>
                                     <div className='pr-2'>
-                                        <h1 className='text-[10px] truncate max-w-[120px]'>{conv.lastMessage?.text}</h1>
-                                        <p className='text-[10px] text-blue-800 text-right'>
+                                        <h1 className='text-xl md:text-[12px] text-white truncate max-w-[120px]'>{conv.lastMessage?.text}</h1>
+                                        <p className='text-[10px] text-[#cac7cd] text-right'>
                                             {new Date(conv.lastMessage?.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                         </p>
                                     </div>

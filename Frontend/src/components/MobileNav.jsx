@@ -100,7 +100,7 @@ const MobileNav = () => {
                             <li onClick={() => setMenu(prev => !prev)} className='bg-white font-bold rounded-full text-black p-2 cursor-pointer'>
                                 <IoCloseSharp />
                             </li>
-                            <Link to={'/'}><li className='font-medium'>Edit Profile</li></Link>
+                            <Link to={'/complete-profile'}><li className='font-medium'>Edit Profile</li></Link>
                             <Link to={'/invite'}><li className='font-medium'>Invite</li></Link>
                             <li onClick={() => setLogout(true)} className='font-medium cursor-pointer'>Logout</li>
                             <Link to={'/share'}><li className='font-medium'>Share Id</li></Link>

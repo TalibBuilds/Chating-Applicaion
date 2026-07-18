@@ -51,7 +51,7 @@ const Profile = () => {
       );
 
       dispatch(setUser(response.data.user));
-      navigate('/', { replace: true }); // ✅ success ke baad Home pe bhejo
+      navigate('/me', { replace: true }); // ✅ success ke baad Home pe bhejo
     } catch (err) {
       setServerError(err.response?.data?.message || 'Something went wrong. Try again.');
     }

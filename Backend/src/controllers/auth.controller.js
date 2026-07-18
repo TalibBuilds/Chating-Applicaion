@@ -63,6 +63,7 @@ const registerUser = async (req, res) => {
 }
 
 const loginUser = async (req, res) => {
+    console.log("HIT lOGIN")
     try {
         const { Identifier , password } = req.body;
 
