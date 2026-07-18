@@ -20,14 +20,12 @@ const Profile = () => {
   const previewFile = (event) => {
     const file = event.target.files[0];
     if (file) {
-      // createObjectURL is much lighter than base64 (FileReader) for previews
       setPreviewUrl(URL.createObjectURL(file));
     } else {
       setPreviewUrl(null);
     }
   };
 
-  // cleanup object URL to avoid memory leaks
   useEffect(() => {
     return () => {
       if (previewUrl) URL.revokeObjectURL(previewUrl);
@@ -46,26 +44,23 @@ const Profile = () => {
       const response = await axiosInstance.patch(
         '/api/user/profile',
         formData
-        // ❌ Content-Type header hata diya — axios khud
-        // multipart/form-data + boundary set karega
       );
 
       dispatch(setUser(response.data.user));
-      navigate('/me', { replace: true }); // ✅ success ke baad Home pe bhejo
+      navigate('/me', { replace: true });
     } catch (err) {
       setServerError(err.response?.data?.message || 'Something went wrong. Try again.');
     }
   };
 
   return (
-    <div className='p-2 min-h-screen w-full flex items-center justify-center
-      bg-[url("/images/3d.avif")] bg-cover'>
+    <div className='p-2 min-h-screen w-full flex items-center justify-center bg-[#344e41]'>
 
-      <div className='glass-effect w-full max-w-md rounded-2xl p-6 shadow-2xl text-white'>
+      <div className='bg-gradient-to-br from-[#3a5a40] to-[#a3b18a] w-full max-w-md rounded-2xl p-6 shadow-[0_10px_50px_rgba(0,55,0,0.55)] text-[#dad7cd]'>
 
         <div className='flex flex-col items-center gap-4 pt-2'>
           <img
-            className='w-20 md:w-30 h-20 md:h-30 object-cover overflow-hidden rounded-full border-2 border-white/20 shadow-lg'
+            className='w-20 md:w-30 h-20 md:h-30 object-cover overflow-hidden rounded-full border-2 border-[#dad7cd]/30 shadow-lg'
             src={previewUrl || '/images/blanck-profile.jpg'}
             alt='Avatar'
           />
@@ -82,17 +77,17 @@ const Profile = () => {
             type='file'
             accept='image/*'
             {...register('avtar', { onChange: previewFile })}
-            className='glass-effect rounded-xl px-3 py-2 text-white
-              placeholder-slate-400 focus:outline-none focus:ring-2
-              focus:ring-indigo-500/50'
+            className='rounded-xl px-3 py-2 text-[#dad7cd] shadow-sm shadow-[#dad7cd]
+              placeholder-[#dad7cd]/60 outline-none focus:ring-2
+              focus:ring-[#dad7cd]/50 bg-transparent'
           />
 
           <textarea
             {...register('bio', { required: 'Bio is required' })}
             placeholder='Write your bio here...'
-            className='glass-effect rounded-xl px-3 py-2 text-white
-              placeholder-slate-400 focus:outline-none focus:ring-2
-              focus:ring-indigo-500/50'
+            className='rounded-xl px-3 py-2 text-[#dad7cd] shadow-sm shadow-[#dad7cd]
+              placeholder-[#dad7cd]/60 outline-none focus:ring-2
+              focus:ring-[#dad7cd]/50 bg-transparent'
             rows={3}
           />
           {errors.bio && (
@@ -106,7 +101,8 @@ const Profile = () => {
           <button
             type='submit'
             disabled={isSubmitting}
-            className='glass-effect py-3 w-[60%] mx-auto rounded-xl font-semibold text-white
+            className='bg-[#315140] text-[#dad7cd] shadow-sm shadow-[#dad7cd] hover:bg-[#26402f]
+              py-3 w-[60%] mx-auto rounded-xl font-semibold
               mt-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed'
           >
             {isSubmitting ? 'Saving...' : 'Save Profile'}
